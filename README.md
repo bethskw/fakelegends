@@ -12,22 +12,48 @@ pawopy for tooting (publishing to mastodon)
 
 tweepy if you prefer to tweet - code is there but commented out
 
-# Setup #
+# Setup - training the neural net #
 
-1. Get your things (in this case, I used a list of legendary creatures and
-their descriptions) 
+1. You'll need a list of input items. Included here is a list of legendary
+creatures and their descriptions (from Wikipedia)
 
-2. Train a neural net to make more of them
+2. Use *train.py* to create a neural network trained on this input. Training
+a neural net can take a while - this is a small one, only took me about an
+hour. You can run it for a longer or shorter time if you like, and stop when
+it gives you appropriately wacky output. 
 
-3. Create a list of the items' names (the legendary creatures' names, minus
-their descriptions) - the bot will check this list to make sure it's not
-reinventing something real
+This creates a file called *textgenrnn_weights.hdf5*. This is the brains of
+your neural net. 
 
-4. Adjust the code as needed (input of a different format may require
-slightly different parsing/checking) 
+3.  Use *peek.py 0.5* to see what kind of output the neural net is able to
+produce.  This step is optional, just for your own curiousity.
 
-5. Create an account and app for your bot. Copy the access token into the secrets
-file. 
+Any questions? Check the docs for textgenrnn! :) 
 
-6. Run the make_creature script from the command line and/or set up a cron
-job.
+# Setup part 2 - creating the bot #
+
+1. Create a mastodon account for your bot (recommended: http://botsin.space )
+
+2. In the settings of that account: 
+	
+	a. Go to Development 
+
+	b. Create an app 
+
+	c. Click on the app you just created 
+
+	d. Highlight and copy the access token.
+
+3. Add the access token to the toot_secrets.py file included here.
+
+4. Run the *make_creature.py* script from the command line to make sure it does the right thing. (This provides some command line feedback and also makes it toot its first toot!)
+
+5. Set up a cron job to run make_creature.py on your desired interval.
+Optionally you can supply a temperature argument: 0.1 gives boring output,
+1.0 gives output so creative it may not make sense.
+
+Any issues with the tooting, check the docs for pawopy. 
+
+(If you prefer to publish to twitter instead of mastodon, uncomment the code
+for tweepy and make sure to set up the access tokens for your twitter
+account) 
