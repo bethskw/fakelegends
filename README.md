@@ -4,6 +4,8 @@ This bot uses a trained neural net (made with textgenrnn) to generate new
 items, check them against its input, and toot out the new item if it passes
 the test. 
 
+See the live version of this bot on mastodon: https://botsin.space/@fakelegends
+
 # Dependencies #
 
 textgenrnn for the neural net
@@ -57,3 +59,13 @@ Any issues with the tooting, check the docs for pawopy.
 (If you prefer to publish to twitter instead of mastodon, uncomment the code
 for tweepy and make sure to set up the access tokens for your twitter
 account) 
+
+# Example crontab #
+
+As a user (on linux/etc), run the command `crontab -e` and type something
+like this:
+
+```
+0 6 * * *	/home/you/fakelegends/make_creature.py 0.5
+0 18 * * * 	/home/you/fakelegends/make_creature.py 1.0
+```
